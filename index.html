@@ -8,6 +8,8 @@
   <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
   <style>
     body {font-size: 24px; font-family: 'PT Sans Narrow', "Helvetica Neue", Arial, sans-serif; max-width: 22em; margin: 1em auto; padding: 0 0.2em; color: #444;}
+    h1, h2 {margin: 1em 0 0;}
+    ul, li {margin: 0.5em 0 1em;}
     a {color: #000; text-decoration: none;}
     a:hover {text-decoration: underline;}
     ul {line-height: 1.4;}
@@ -15,17 +17,18 @@
 </head>
 <body>
   <h1>Pascal Hertleif</h1>
-  <ul id="stuff">
+  <ul>
     <li>
       <a href="http://pascalhertleif.de/" rel="me">pascalhertleif.de</a>
     </li>
     <li>
       <a href="twitter.com/killercup" rel="me">Twitter</a>
     </li>
-    <li>
-      <a href="https://github.com/killercup" rel="me">Github</a>
-    </li>
   </ul>
+
+  <h2 id="stuff">
+    <a href="https://github.com/killercup" rel="me">Github</a>
+  </h2>
 
   <a href="https://github.com/killercup">
     <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/>
@@ -35,7 +38,6 @@
   <script>
     Zepto(function ($) {
       var REPOS = 'https://api.github.com/users/killercup/repos?type=public&sort=pushed&direction=desc';
-      var $headline = $('<li>On Github Pages</li>');
       var $list = $('<ul/>');
       var MAX = 5;
 
@@ -46,12 +48,16 @@
           // if (hits >= 5) break;
           item = data[i];
           if (item.homepage && item.homepage.indexOf('killercup.github.io') >= 0) {
-            $list.append('<li><a href="'+item.homepage+'" title="'+item.description+'">'+item.name+'</a></li>');
+            $list.append('<li>'+
+              '<a href="'+item.homepage+'">'+item.name+'</a><br/>'+
+              '<small>'+item.description+'</small>'+
+            '</li>');
             hits++;
           }
         }
 
-        $('#stuff').append($headline.append($list));
+        $('#stuff').find('h2 a').append(' Pages:');
+        $('#stuff').after($list);
       })
     });
   </script>

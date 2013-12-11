@@ -3,18 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <title>Pascal Hertleif</title>
+
+  <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height" />
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
   <style>
-    body {font-size: 24px; font-family: Helvetica, Arial, sans-serif; max-width: 22em; margin: 1em auto;}
-    a {color: black; text-decoration: none;}
+    body {font-size: 24px; font-family: 'PT Sans Narrow', "Helvetica Neue", Arial, sans-serif; max-width: 22em; margin: 1em auto; padding: 0 0.2em; color: #444;}
+    a {color: #000; text-decoration: none;}
     a:hover {text-decoration: underline;}
     ul {line-height: 1.4;}
   </style>
 </head>
 <body>
   <h1>Pascal Hertleif</h1>
-  <ul>
-    <li><a href="http://pascalhertleif.de/" rel="me">Website</a></li>
-    <li><a href="https://github.com/killercup" rel="me">Github</a></li>
+  <ul id="stuff">
+    <li>
+      <a href="http://pascalhertleif.de/" rel="me">pascalhertleif.de</a>
+    </li>
+    <li>
+      <a href="twitter.com/killercup" rel="me">Twitter</a>
+    </li>
+    <li>
+      <a href="https://github.com/killercup" rel="me">Github</a>
+    </li>
   </ul>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.1/zepto.min.js"></script>
+  <script>
+    Zepto(function ($) {
+      var REPOS = 'https://api.github.com/users/killercup/repos?type=public&sort=pushed&direction=desc';
+      var $headline = $('<li>On Github Pages</li>');
+      var $list = $('<ul/>');
+      var MAX = 5;
+
+      $.getJSON(REPOS, function(data) {
+        var hits = 0;
+        var i, _len, item;
+        for (i = 0, _len = data.length; i < _len; i++) {
+          // if (hits >= 5) break;
+          item = data[i];
+          if (item.homepage && item.homepage.indexOf('killercup.github.io') >= 0) {
+            $list.append('<li><a href="'+item.homepage+'" title="'+item.description+'">'+item.name+'</a></li>');
+            hits++;
+          }
+        }
+
+        $('#stuff').append($headline.append($list));
+      })
+    });
+  </script>
 </body>
 </html>

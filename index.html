@@ -37,9 +37,8 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.1/zepto.min.js"></script>
   <script>
     Zepto(function ($) {
-      var REPOS = 'https://api.github.com/users/killercup/repos?type=public&sort=pushed&direction=desc';
+      var REPOS = 'https://api.github.com/users/killercup/repos?type=public&sort=pushed&direction=desc&per_page=100';
       var $list = $('<ul/>');
-      var MAX = 5;
 
       $.getJSON(REPOS, function(data) {
         var hits = 0;

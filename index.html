@@ -34,10 +34,10 @@
     <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/>
   </a>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.1/zepto.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.1/zepto.min.js"></script>
   <script>
     Zepto(function ($) {
-      var REPOS = '//api.github.com/users/killercup/repos?type=public&sort=pushed&direction=desc&per_page=100';
+      var REPOS = 'https://api.github.com/users/killercup/repos?type=public&sort=pushed&direction=desc&per_page=100';
       var $list = $('<ul/>');
 
       $.getJSON(REPOS, function(data) {
@@ -49,7 +49,7 @@
           if (item.homepage && item.homepage.indexOf('killercup.github.io') >= 0) {
             $list.append('<li>'+
               '<a href="'+item.homepage+'">'+item.name+'</a><br/>'+
-              '<small>'+item.description+'</small>'+
+              (item.description.length ? '<small>'+(item.description)+'</small>' : "") +
             '</li>');
             hits++;
           }

@@ -49,7 +49,7 @@
           if (item.homepage && item.homepage.indexOf('killercup.github.io') >= 0) {
             $list.append('<li>'+
               '<a href="'+item.homepage+'">'+item.name+'</a><br/>'+
-              (item.description.length ? '<small>'+(item.description)+'</small>' : "") +
+              (item.description ? '<small>'+item.description+'</small>' : "") +
             '</li>');
             hits++;
           }
